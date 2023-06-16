@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "bilibilispider"
+version = "0.1.0"
+description = ""
+authors = ["XYCode-Kerman <xycode-xyc@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiohttp = "^3.8.4"
+pandas = "^2.0.2"
+bilibili-api-python = "^15.4.4"
+json5 = "^0.9.14"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

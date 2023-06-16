@@ -28,6 +28,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install poetry
         poetry install
-    - name: Fetch Data
+    - name: Fetch Data and Commit
       run: |
         poetry run python main.py
+        git add .
+        git commmit -m "Update"
+        git push origin master

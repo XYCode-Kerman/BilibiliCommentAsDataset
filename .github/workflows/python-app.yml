@@ -32,5 +32,5 @@ jobs:
       run: |
         poetry run python main.py
         git add .
-        git commmit -m "Update"
+        git commit -m "Update"
         git push origin master

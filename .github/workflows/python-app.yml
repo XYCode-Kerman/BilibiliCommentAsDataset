@@ -16,7 +16,6 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -34,14 +33,11 @@ jobs:
       run: |
         poetry run python main.py
       
-    - name: 创建GitHub Release
-      id: create_release
-      uses: actions/create-release@latest
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    - uses: "marvinpinto/action-automatic-releases@latest"
       with:
-        tag_name: AutoGen
-        release_name: AutoGen
-        body: 自动生成的数据集
-        draft: false
+        repo_token: "${{ secrets.GH_TOKEN }}"
+        automatic_release_tag: "latest"
         prerelease: false
+        title: "Auto Build"
+        files: |
+          comments.csv

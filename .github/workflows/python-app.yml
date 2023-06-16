@@ -8,6 +8,8 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  schedule:
+    - cron: '30 * * * *'
 
 permissions:
   contents: write
@@ -31,6 +33,15 @@ jobs:
     - name: Fetch Data and Commit
       run: |
         poetry run python main.py
-        git add .
-        git commit -m "Update"
-        git push origin master
+      
+    - name: 创建GitHub Release
+      id: create_release
+      uses: actions/create-release@latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      with:
+        tag_name: AutoGen
+        release_name: AutoGen
+        body: 自动生成的数据集
+        draft: false
+        prerelease: false

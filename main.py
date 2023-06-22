@@ -10,10 +10,10 @@ videolist = [int(x) for x in videolist.keys()]
 df = pd.DataFrame(columns=['uname', 'message', 'like', 'oid', 'label'])
 
 async def fetch_a_page(oid: int, page: int):
-    comment = dict(await bapi.comment.get_comments(oid, bapi.comment.CommentResourceType.VIDEO, page))
-    
     # parse comment
     try:
+        comment = dict(await bapi.comment.get_comments(oid, bapi.comment.CommentResourceType.VIDEO, page))
+        
         for c in comment['replies']:
             # label 列的数值根据label值来确定
             df.loc[c['rpid']] = [c['member']['uname'], c['content']['message'], c['like'], oid, label[str(oid)]]
@@ -47,6 +47,7 @@ async def main():
     
     for oid in videolist:
         tasks.append(asyncio.create_task(fetch_all_page(oid)))
+        await asyncio.sleep(3)
     
     await asyncio.gather(*tasks)
     
